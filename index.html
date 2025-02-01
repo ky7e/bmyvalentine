@@ -16,6 +16,7 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      position: relative; /* Added for positioning the music player */
     }
 
     /* Envelope styling */
@@ -188,6 +189,20 @@
         opacity: 1;
       }
     }
+
+    /* Music player styling */
+    audio {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 200px; /* Adjust the width as needed */
+      opacity: 0.8; /* Make it slightly transparent */
+      transition: opacity 0.3s ease;
+    }
+
+    audio:hover {
+      opacity: 1; /* Fully visible on hover */
+    }
   </style>
 </head>
 <body>
@@ -213,8 +228,9 @@
   </div>
 
   <!-- Background music -->
-  <audio controls autoplay muted loop>
-  <source src="background-music.mp3"></audio>
+  <audio controls autoplay loop>
+    <source src="music.mp3"></audio>
+  </audio>
 
   <script>
     const envelope = document.getElementById('envelope');
@@ -224,14 +240,7 @@
     const response = document.getElementById('response');
     const heart = document.getElementById('heart');
     const photoImage = document.getElementById('photoImage');
-    const backgroundMusic = document.getElementById('backgroundMusic');
     let noClicks = 0;
-
-    // Play background music at 50% volume when the site loads
-    window.onload = () => {
-      backgroundMusic.volume = 0.5; // Set volume to 50%
-      backgroundMusic.play(); // Start playing the music
-    };
 
     // Open the envelope and reveal the main content
     envelope.addEventListener('click', () => {
