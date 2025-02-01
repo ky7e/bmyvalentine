@@ -123,9 +123,8 @@
     yaaaaaaaaaay! <span id="heart" class="bounce">💖</span>
   </div>
 
-  <!-- Audio elements for sound effects -->
-  <audio id="yesSound" src="https://drive.google.com/uc?export=download&id=1VX9PTcT6OWlxQYdj9O7KpTQo03gYn3of"></audio>
-  <audio id="noSound" src="no-sound.mp3"></audio>
+  <!-- Background music -->
+  <audio id="backgroundMusic" src="No One Noticed but its my favorite part, The Marias.mp3" loop></audio>
 
   <script>
     const yesButton = document.getElementById('yesButton');
@@ -133,12 +132,16 @@
     const response = document.getElementById('response');
     const heart = document.getElementById('heart');
     const photoImage = document.getElementById('photoImage');
-    const yesSound = document.getElementById('yesSound');
-    const noSound = document.getElementById('noSound');
+    const backgroundMusic = document.getElementById('backgroundMusic');
     let noClicks = 0;
 
+    // Play background music at 50% volume when the site loads
+    window.onload = () => {
+      backgroundMusic.volume = 0.5; // Set volume to 50%
+      backgroundMusic.play(); // Start playing the music
+    };
+
     yesButton.addEventListener('click', () => {
-      yesSound.play(); // Play the "Yes" sound
       response.classList.remove('hidden');
       heart.classList.add('bounce'); // Add the bouncing animation to the heart
       noButton.style.display = 'none';
@@ -149,11 +152,18 @@
     });
 
     noButton.addEventListener('click', () => {
-      noSound.play(); // Play the "No" sound
       noClicks++;
       if (noClicks >= 5) {
         noButton.style.display = 'none'; // Hide the "No" button after 5 clicks
+
+        // Replace "sad.gif" with "hehe.gif" after the button disappears
+        setTimeout(() => {
+          photoImage.src = "hehe.gif"; // Replace with the correct path to your GIF
+        }, 500); // Delay to ensure the button is fully hidden
       } else {
+        // Change the photo to "sad.gif"
+        photoImage.src = "sad.gif"; // Replace with the correct path to your GIF
+
         // Reduce the opacity of the "No" button with each click
         const currentOpacity = parseFloat(window.getComputedStyle(noButton).opacity);
         noButton.style.opacity = currentOpacity - 0.2;
