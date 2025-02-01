@@ -71,6 +71,22 @@
       font-size: 2em;
       color: #d32f2f;
       animation: fadeIn 1s ease-in-out;
+      font-weight: bold; /* Make the text bold */
+    }
+
+    /* Bouncier heart animation */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-40px); /* Bigger bounce */
+      }
+    }
+
+    .bounce {
+      display: inline-block;
+      animation: bounce 0.5s ease-in-out infinite; /* Adjust speed here */
     }
 
     /* Keyframes for animations */
@@ -97,16 +113,14 @@
 <body>
   <h1>zo will you be my valentinez?</h1>
   <div class="photo">
-    <img src="https://drive.google.com/thumbnail?id=1mtJbQKbrF6a2U4L-dLKyNrmIwCm6M2sb
-
-    " alt="Our Photo">
+    <img id="photoImage" src="https://drive.google.com/thumbnail?id=1mtJbQKbrF6a2U4L-dLKyNrmIwCm6M2sb" alt="Our Photo">
   </div>
   <div class="buttons">
-    <button id="yesButton">Yes</button>
-    <button id="noButton">No</button>
+    <button id="yesButton">yez!!</button>
+    <button id="noButton">noez 3:</button>
   </div>
   <div id="response" class="hidden">
-    i love you so much! 💖
+    yaaaaaaaaaay! <span id="heart" class="bounce">💖</span>
   </div>
 
   <!-- Audio elements for sound effects -->
@@ -117,6 +131,8 @@
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
     const response = document.getElementById('response');
+    const heart = document.getElementById('heart');
+    const photoImage = document.getElementById('photoImage');
     const yesSound = document.getElementById('yesSound');
     const noSound = document.getElementById('noSound');
     let noClicks = 0;
@@ -124,8 +140,12 @@
     yesButton.addEventListener('click', () => {
       yesSound.play(); // Play the "Yes" sound
       response.classList.remove('hidden');
+      heart.classList.add('bounce'); // Add the bouncing animation to the heart
       noButton.style.display = 'none';
       yesButton.style.display = 'none';
+
+      // Change the photo to the "love-heart.gif"
+      photoImage.src = "love-heart.gif"; // Replace with the correct path to your GIF
     });
 
     noButton.addEventListener('click', () => {
